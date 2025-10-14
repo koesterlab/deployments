@@ -88,7 +88,7 @@ Hints:
    * z (zoxide): smart navigation (cd replacement)
 * Do NOT use conda to manage software (it is available, but just for snakemake internal use)
 EOF
-  for msg in $@
+  for msg in "$@"
   do
     echo "* $msg"
   done
