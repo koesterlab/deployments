@@ -60,10 +60,11 @@ setup_user() {
 }
 
 update_given_profiles() {
-  for f in $@
+  for f in "$@"
   do
+    url=https://github.com/koesterlab/deployments/$f
     echo Updating profile $f...
-    sudo bash -c "curl -L https://github.com/koesterlab/deployments/$f > /etc/profile.d/$(basename $f)"
+    sudo bash -c "curl -L $url > /etc/profile.d/$(basename $f)"
   done
 }
 
