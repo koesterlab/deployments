@@ -17,6 +17,8 @@ setup_config() {
 
 setup_config ~/.pixi/config.toml "default-channels = [\"conda-forge\", \"bioconda\"]"
 
+relogin=false
+
 # install software
 setup_cmd() {
   cmd=$1
@@ -25,6 +27,7 @@ setup_cmd() {
   then
     echo Installing "$cmd..."
     eval "$install_cmd"
+    relogin=true
   fi
 }
 
@@ -37,7 +40,7 @@ setup_cmd exa
 setup_cmd rg "pixi global install ripgrep"
 setup_cmd bat
 setup_cmd sad
-setup_cmd zoxide "pixi global install zoxide && eval \"$(zoxide init bash)\""
+setup_cmd zoxide "pixi global install zoxide && echo 'eval \"$(zoxide init bash)\"' >> ~/.bashrc"
 
 # admin commands
 setup_user() {
@@ -94,4 +97,8 @@ EOF
   do
     echo "* $msg"
   done
+
+  if [ "$relogin" = true ] ; then
+    echo "Please relogin to make all recent changes effective!"
+  fi
 }
