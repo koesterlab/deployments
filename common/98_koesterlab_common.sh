@@ -101,6 +101,7 @@ EOF
   done
 
   if [ "$relogin" = true ] ; then
+    echo ""
     echo "Please relogin to make all recent changes effective!"
   fi
 }
