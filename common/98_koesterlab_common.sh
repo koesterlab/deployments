@@ -64,12 +64,22 @@ setup_user() {
   )
 }
 
-update_given_profiles() {
-  for f in "$@"
+get_profile_deployment_cmd() {
+  profile=$1
+  url=https://raw.githubusercontent.com/koesterlab/deployments/refs/heads/main/$profile
+  echo "curl -L $url > /etc/profile.d/$(basename $profile)"
+}
+
+update_profiles() {
+  machine=$1
+  for f in ${DEPLOY_PROFILES[@]}
   do
-    url=https://raw.githubusercontent.com/koesterlab/deployments/refs/heads/main/$f
-    echo Updating profile $f...
-    sudo bash -c "curl -L $url > /etc/profile.d/$(basename $f)"
+    echo Updating profile $f on $machine...
+    if [ "$machine" = "localhost" ] ; then
+      sudo bash -c "$(get_profile_deployment_cmd $f)"
+    else
+      ssh $machine "sudo bash -c \"$(get_profile_deployment_cmd $f)\""
+    fi
   done
 }
 
