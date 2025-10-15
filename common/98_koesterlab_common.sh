@@ -70,7 +70,7 @@ get_profile_deployment_cmd() {
   echo "curl -L $url > /etc/profile.d/$(basename $profile)"
 }
 
-update_profiles() {
+update_machine() {
   machine=$1
   for f in ${DEPLOY_PROFILES[@]}
   do
@@ -81,6 +81,13 @@ update_profiles() {
       ssh $machine "sudo bash -c \"$(get_profile_deployment_cmd $f)\""
     fi
   done
+  update_cmd="sudo apt update && sudo apt upgrade -y"
+  echo Updating machine $machine
+  if [ "$machine" = "localhost" ] ; then
+    eval $update_cmd
+  else
+    ssh $machine "$update_cmd"
+  fi
 }
 
 
