@@ -1,5 +1,6 @@
 # configure software
 export PATH="$HOME/.pixi/bin:$PATH"
+export SNAKEMAKE_PROFILE="default"
 
 setup_config() {
   (
