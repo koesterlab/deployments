@@ -9,12 +9,12 @@ setup_config() {
     if ! [ -f $config ]
     then
       mkdir -p $(dirname $config)
-      printf $content > $config
+      printf "$content" > $config
     fi
   )
 }
 
-setup_config ~/.pixi/config.toml 'default-channels = ["conda-forge", "bioconda"]'
+setup_config ~/.pixi/config.toml "default-channels = [\"conda-forge\", \"bioconda\"]"
 
 # install software
 setup_cmd() {
