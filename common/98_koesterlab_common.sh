@@ -40,7 +40,8 @@ setup_cmd exa
 setup_cmd rg "pixi global install ripgrep"
 setup_cmd bat
 setup_cmd sad
-setup_cmd zoxide "pixi global install zoxide && echo \"eval \\"\$(zoxide init bash)\\"\" >> ~/.bashrc"
+setup_cmd fzf "pixi global install fzf && echo 'eval \"\$(fzf --bash)\"' >> ~/.bashrc"
+setup_cmd zoxide "pixi global install zoxide && echo 'eval \"\$(zoxide init bash)\"' >> ~/.bashrc"
 
 # admin commands
 setup_user() {
@@ -90,6 +91,7 @@ Hints:
    * rg (ripgrep): search in files with regexes (grep replacement)
    * bat: view files (cat replacement)
    * sad: replace text in files (sed replacement)
+   * fzf: fuzzy finding (find replacement)
    * z (zoxide): smart navigation (cd replacement)
 * Do NOT use conda to manage software (it is available, but just for snakemake internal use)
 EOF
