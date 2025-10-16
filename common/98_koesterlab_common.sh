@@ -91,7 +91,7 @@ update_machine() {
     run_on_machine $machine "sudo bash -c '$(get_profile_deployment_cmd $f)'" "Deploying profile $f"
   done
 
-  for $userspec in "${DEPLOY_USERS[@]}"
+  for userspec in "${DEPLOY_USERS[@]}"
   do
     echo $userspec
   done
