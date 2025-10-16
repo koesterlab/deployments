@@ -62,7 +62,7 @@ setup_user() {
     sudo mkdir -p $sshdir
     sudo bash -c "echo '$pubkey' > $authkeys"
     sudo chmod -R g-rwx,o-rwx $sshdir
-    sudo chown $username:$username $authkeys
+    sudo chown -R $username:$username $sshdir
   )
 }
 
