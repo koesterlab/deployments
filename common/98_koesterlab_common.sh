@@ -96,7 +96,7 @@ update_machine() {
     echo $userspec
   done
 
-  run_on_machine $machine "sudo apt update && sudo apt upgrade -y" "Updating machine"
+  run_on_machine $machine "sudo apt update && sudo apt upgrade -y" "Updating system packages"
 }
 
 
