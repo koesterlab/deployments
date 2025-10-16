@@ -52,14 +52,16 @@ setup_user() {
     sshdir=/home/$username/.ssh
     authkeys=$sshdir/authorized_keys
 
-    echo Adding user
-    sudo useradd --groups koesterlab --shell /bin/bash -m $username
+    if ! [ id $username &>/dev/null ] ; then
+      echo "Setting up user $username..."
+      sudo useradd --groups koesterlab --shell /bin/bash -m $username
+    fi
     echo Setup ssh dir
     sudo mkdir $sshdir
     echo Copy public key
     sudo bash -c "echo '$pubkey' > $authkeys"
     echo Setting public key permissions
-    sudo chmod g-rwx,o-rwx $authkeys
+    sudo chmod g-rwx,o-rwx $sshdir
     sudo chown $username:$username $authkeys
   )
 }
@@ -93,7 +95,7 @@ update_machine() {
 
   for userspec in "${DEPLOY_USERS[@]}"
   do
-    echo $userspec
+    run_on_machine $machine "setup_user $userspec" "Setting up or updating user $userspec"
   done
 
   run_on_machine $machine "sudo apt update && sudo apt upgrade -y" "Updating system packages"
