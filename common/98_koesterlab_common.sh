@@ -64,6 +64,20 @@ setup_user() {
   )
 }
 
+run_on_machine() {
+  machine=$1
+  cmd=$2
+  msg=$3
+
+  echo "$msg on $machine..."
+
+  if [ "$machine" = "localhost" ] ; then
+    eval $cmd
+  else
+    ssh $machine "$cmd"
+  fi
+}
+
 get_profile_deployment_cmd() {
   profile=$1
   url=https://raw.githubusercontent.com/koesterlab/deployments/refs/heads/main/$profile
@@ -74,20 +88,15 @@ update_machine() {
   machine=$1
   for f in ${DEPLOY_PROFILES[@]}
   do
-    echo Updating profile $f on $machine...
-    if [ "$machine" = "localhost" ] ; then
-      sudo bash -c "$(get_profile_deployment_cmd $f)"
-    else
-      ssh $machine "sudo bash -c \"$(get_profile_deployment_cmd $f)\""
-    fi
+    run_on_machine $machine "sudo bash -c '$(get_profile_deployment_cmd $f)'" "Deploying profile $f"
   done
-  update_cmd="sudo apt update && sudo apt upgrade -y"
-  echo Updating machine $machine
-  if [ "$machine" = "localhost" ] ; then
-    eval $update_cmd
-  else
-    ssh $machine "$update_cmd"
-  fi
+
+  for $userspec in "${DEPLOY_USERS[@]}"
+  do
+    echo $userspec
+  done
+
+  run_on_machine $machine "sudo apt update && sudo apt upgrade -y" "Updating machine"
 }
 
 
