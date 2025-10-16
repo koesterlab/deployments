@@ -57,11 +57,10 @@ setup_user() {
       echo "Setting up user $username..."
       sudo useradd --groups koesterlab --shell /bin/bash -m $username
     fi
-    echo Setup ssh dir
-    sudo mkdir $sshdir
-    echo Copy public key
+      echo "Updating user $username..."
+    fi
+    sudo mkdir -p $sshdir
     sudo bash -c "echo '$pubkey' > $authkeys"
-    echo Setting public key permissions
     sudo chmod g-rwx,o-rwx $sshdir
     sudo chown $username:$username $authkeys
   )
