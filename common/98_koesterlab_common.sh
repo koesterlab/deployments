@@ -52,7 +52,8 @@ setup_user() {
     sshdir=/home/$username/.ssh
     authkeys=$sshdir/authorized_keys
 
-    if ! [ id $username &>/dev/null ] ; then
+    if ! (id $username &> /dev/null)
+    then
       echo "Setting up user $username..."
       sudo useradd --groups koesterlab --shell /bin/bash -m $username
     fi
