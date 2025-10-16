@@ -56,7 +56,7 @@ setup_user() {
     then
       echo "Setting up user $username..."
       sudo useradd --groups koesterlab --shell /bin/bash -m $username
-    fi
+    else
       echo "Updating user $username..."
     fi
     sudo mkdir -p $sshdir
