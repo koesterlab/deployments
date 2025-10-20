@@ -55,6 +55,7 @@ setup_user() {
     if ! (id $username &> /dev/null)
     then
       echo "Setting up user $username..."
+      sudo groupadd koesterlab || true
       sudo useradd --groups koesterlab --shell /bin/bash -m $username
     else
       echo "Updating user $username..."
@@ -96,7 +97,7 @@ update_machine() {
   for userspec in "${DEPLOY_USERS[@]}"
   do
     # run as login shell in order to have access to the deployed profiles
-    run_on_machine $machine "bash -lc 'setup_user $userspec'" "Setting up or updating user $userspec"
+    run_on_machine $machine "bash --login -c 'setup_user $userspec'" "Setting up or updating user $userspec"
   done
 
   run_on_machine $machine "sudo apt update && sudo apt upgrade -y" "Updating system packages"
