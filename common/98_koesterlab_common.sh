@@ -97,6 +97,7 @@ update_machine() {
   for userspec in "${DEPLOY_USERS[@]}"
   do
     # run as login shell in order to have access to the deployed profiles
+    # use eval such that the $userspec variable is interpreted as two arguments
     run_on_machine $machine "bash --login -c 'eval \"setup_user $userspec\"'" "Setting up or updating user $userspec"
   done
 
