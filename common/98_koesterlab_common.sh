@@ -97,7 +97,7 @@ update_machine() {
   for userspec in "${DEPLOY_USERS[@]}"
   do
     # run as login shell in order to have access to the deployed profiles
-    run_on_machine $machine "bash --login -c 'setup_user $userspec'" "Setting up or updating user $userspec"
+    run_on_machine $machine "bash --login -c 'eval \"setup_user $userspec\"'" "Setting up or updating user $userspec"
   done
 
   run_on_machine $machine "sudo apt update && sudo apt upgrade -y" "Updating system packages"
