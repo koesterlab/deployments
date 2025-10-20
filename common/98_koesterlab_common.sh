@@ -102,9 +102,10 @@ update_machine() {
     run_on_machine $machine "bash --login -c 'setup_user $username $pubkey'" "Setting up or updating user $username"
   done
 
-  run_on_machine $machine "sudo apt update && sudo apt upgrade -y" "Updating system packages"
+  run_on_machine $machine "sudo apt-get update && sudo apt-get upgrade -y" "Updating system packages"
 
-  # TODO transfer secrets to other machine (for now we do that manually)
+  # TODO obtain/transfer secrets (for now we do that manually)
+  run_on_machine $machine "sudo chown o-r /etc/profile.d/secrets.sh" "Making secrets only readable by root"
 }
 
 
