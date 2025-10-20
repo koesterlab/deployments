@@ -105,7 +105,7 @@ update_machine() {
   run_on_machine $machine "sudo apt-get update && sudo apt-get upgrade -y" "Updating system packages"
 
   # TODO obtain/transfer secrets (for now we do that manually)
-  run_on_machine $machine "sudo chown o-r /etc/profile.d/secrets.sh" "Making secrets only readable by root"
+  run_on_machine $machine "sudo chmod o-r /etc/profile.d/secrets.sh" "Making secrets only readable by root"
 }
 
 
