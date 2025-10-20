@@ -8,5 +8,7 @@ DEPLOY_PROFILES=("common/98_koesterlab_common.sh" "denbi/99_koesterlab_cebitec.s
 
 show_login_message \
   "Do NOT store data in your home, use s3://koesterlab/<project>, access with s5cmd and by setting --default-storage-prefix s3://koesterlab/<project>" \
+  "Do not compute on the machine main. Instead, jump to compute01." \
+  "Put any workflows in project specific subfolders under /mnt/workspace/<project>/ on compute01." \
   "Do NOT put non-public human or personal data anywhere in here (also not into the s3)!"
 
