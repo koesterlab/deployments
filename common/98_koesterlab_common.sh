@@ -103,6 +103,8 @@ update_machine() {
   done
 
   run_on_machine $machine "sudo apt update && sudo apt upgrade -y" "Updating system packages"
+
+  # TODO transfer secrets to other machine (for now we do that manually)
 }
 
 
