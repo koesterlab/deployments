@@ -99,7 +99,7 @@ update_machine() {
     # run as login shell in order to have access to the deployed profiles
     username=$(echo $userspec | cut -d ':' -f 1)
     pubkey=$(echo $userspec | cut -d ':' -f 2)
-    run_on_machine $machine "bash --login -c 'setup_user $username $pubkey'" "Setting up or updating user $username"
+    run_on_machine $machine "bash --login -c 'setup_user $username \"$pubkey\"'" "Setting up or updating user $username"
   done
 
   run_on_machine $machine "sudo apt-get update && sudo apt-get upgrade -y" "Updating system packages"
