@@ -16,6 +16,7 @@ setup_config() {
 }
 
 setup_config ~/.pixi/config.toml "default-channels = [\"conda-forge\", \"bioconda\"]"
+setup_config ~/.ssh/config "ForwardAgent yes"
 
 relogin=false
 
