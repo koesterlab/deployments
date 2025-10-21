@@ -1,0 +1,4 @@
+storage-s3-endpoint-url: https://openstack.cebitec.uni-bielefeld.de:8080
+default-storage-provider: s3
+software-deployment-method: conda
+default-resources: []

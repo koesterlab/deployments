@@ -1,0 +1,38 @@
+users:
+  jkoester:
+    ssh_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCy...
+    vars:
+      ikim_username: johannes
+
+user_software:
+  - pkg: snakemake
+    with: snakemake-storage-plugin-s3
+    desc: for running workflows
+  - pkg: conda
+  - pkg: exa
+    desc: for listing files (ls replacement)
+  - pkg: s5cmd
+    desc: for accessing s3
+  - pkg: starship
+  - pkg: ripgrep
+    cmd: rg
+    desc: for searching text (grep replacement)
+  - pkg: bat
+    desc: for viewing text files (cat replacement)
+  - pkg: sad
+    desc: for text replacing in files (sed replacement)
+  - pkg: fzf
+    desc: for fuzzy finding files
+  - pkg: zoxide
+    desc: for quickly navigating the filesystem (cd replacement)
+
+login_message:
+  - >
+    Do NOT use conda to manage software (it is available, but just for snakemake
+    internal use).
+
+# TODO find a good way to deploy secrets (idea: tool adds special command that wants
+# them to be pasted from a secret manager like bitwarden)
+# Commands to expose:
+# update_machine <hostname> (does everything except secrets, including user setup)
+# update_secrets <hostname> (only updates secrets)
