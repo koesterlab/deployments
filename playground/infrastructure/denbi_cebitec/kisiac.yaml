@@ -1,4 +1,4 @@
-login_message:
+messages:
   - >
     Do NOT store data in your home, use s3://koesterlab/<project>, access with s5cmd
     and by setting --default-storage-prefix s3://koesterlab/<project>

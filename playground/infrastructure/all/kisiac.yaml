@@ -1,6 +1,8 @@
+infrastructure_name: koesterlab compute
+
 users:
   jkoester:
-    ssh_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCy...
+    ssh_pub_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCy...
     vars:
       ikim_username: johannes
 
@@ -25,8 +27,18 @@ user_software:
     desc: for fuzzy finding files
   - pkg: zoxide
     desc: for quickly navigating the filesystem (cd replacement)
+  - pkg: nbterm
+    with:
+      - ipykernel
+      - polars
+      - pandas
+      - altair
+    desc: for running jupyter notebooks in the terminal (includes polars, pandas, altair)
 
-login_message:
+system_software:
+  - openssh
+
+messages:
   - >
     Do NOT use conda to manage software (it is available, but just for snakemake
     internal use).
