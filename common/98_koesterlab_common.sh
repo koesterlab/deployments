@@ -34,7 +34,7 @@ setup_cmd() {
 
 setup_cmd pixi "curl -fsSL https://pixi.sh/install.sh | sh"
 setup_cmd snakemake "pixi global install snakemake --with snakemake-storage-plugin-s3"
-setup_cmd s5cmd
+setup_cmd s5cmd "s5cmd --install-completion >> ~/.bashrc"
 setup_cmd conda "pixi global install conda && conda init && conda config --set auto_activate_base false"
 setup_cmd starship "pixi global install starship && echo 'eval \"\$(starship init bash)\"' >> ~/.bashrc"
 setup_cmd exa
